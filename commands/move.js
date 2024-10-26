@@ -1,5 +1,6 @@
 const { CONSTANTS } = require("../constants")
 const { getDirectory, putDirectory } = require("../service/dbService")
+const { handleUnsuccessfulDbWrite } = require("../util/errors")
 const { checkForExistenceOfFilepath, moveFilepath } = require("../util/filepathHelpers")
 
 function moveFile(filepath, destination) {
@@ -19,7 +20,7 @@ function moveFile(filepath, destination) {
         const didDbWriteSucceed = putDirectory(updatedDirectory)
 
         if (!didDbWriteSucceed) {
-            console.log(`${CONSTANTS.MESSAGES.COULD_NOT_MOVE} - ${filepath} to ${destination}`)
+            handleUnsuccessfulDbWrite(CONSTANTS.COMMANDS.MOVE, filepath)
             return didDbWriteSucceed
         }
 
