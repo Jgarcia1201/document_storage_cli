@@ -16,7 +16,6 @@ function deleteFile(filepath) {
 
     if (!didDbWriteSucceed) {
         handleUnsuccessfulDbWrite(CONSTANTS.COMMANDS.DELETE, filepath)
-        return false
     }
     return didDbWriteSucceed // true
 }
