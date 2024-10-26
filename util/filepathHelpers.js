@@ -89,36 +89,32 @@ function deleteFilepath(currentDirectory, filepath) {
     return currentDirectory
 }
 
+/* 
+    NOTE: This function is pretty fragile, a filepath with duplicate names in it
+    such as a/a/a would break this. 
+*/
 function moveFilepath(currentDirectory, filepath, destination) {
     const files = filepath.split("/")
     const fileToMove = files[files.length - 1]
     const targetFile = getTargetFileFromPath(currentDirectory, filepath)
     let currentDir = currentDirectory
-    const objectToMove = {[fileToMove]: targetFile}
+    const objectToMove = { [fileToMove]: targetFile }
     const destinationFiles = destination.split("/")
     const finalDestination = destinationFiles[destinationFiles.length - 1]
-    
+
     for (const file of destinationFiles) {
         if (file === finalDestination) {
-            currentDir[finalDestination] = { ...currentDir[finalDestination], ...objectToMove}
+            currentDir[finalDestination] = { ...currentDir[finalDestination], ...objectToMove }
         }
         currentDir = currentDir[file]
 
     }
-
     return deleteFilepath(currentDirectory, filepath)
-
-    /* 
-        NOTE: This function is pretty fragile, a filepath with duplicate names in it
-        such as a/a/a would break this. 
-        But I'm about to land in Japan, so had to make some concessions here.
-    */
 }
 
 function getTargetFileFromPath(currentDirectory, filepath) {
     const parts = filepath.split('/');
     let current = currentDirectory;
-
     for (const part of parts) {
         if (current[part]) {
             current = current[part];
