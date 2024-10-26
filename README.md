@@ -18,3 +18,6 @@ I also knew the exact test case going to be ran against it. Additionally, I'm on
 so I don't have wifi to add jest to the project.
 
 
+PS: Really liked this project as far as interview loops go btw, I liked how it had leetcode esque stuff baked in while also requiring actual development/architecting.
+
+
