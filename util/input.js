@@ -19,7 +19,6 @@ function handleUserInput(inputStr) {
         destination
     }
 
-
     const didCommandSucceed = executeCommand(commandParams)
 
     return {
