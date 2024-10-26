@@ -34,7 +34,7 @@ function parseInput(inputStr) {
         }
     }
 
-    const [command, filename, destination = undefined] = lowercase.split(" ")
+    const [command, filename, destination = undefined] = inputStr.split(" ")
 
     const isValidCommand = Object.values(CONSTANTS.COMMANDS).includes(command)
 
