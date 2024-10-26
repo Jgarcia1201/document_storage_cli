@@ -1,0 +1,10 @@
+{
+  "foods": {
+    "grains": {},
+    "fruits": {},
+    "veg": {
+      "squash": {}
+    }
+  },
+  "alpha": {}
+}
