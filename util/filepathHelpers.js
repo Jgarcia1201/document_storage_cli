@@ -19,10 +19,11 @@ function checkForExistenceOfFilepath(currentDirectory, filepath, command) {
 }
 
 function parseInput(inputStr) {
-    const lowercase = inputStr.toLowerCase()
-    const doesStrHaveSpace = lowercase.indexOf(" ") !== -1
-    const isListCommand = CONSTANTS.COMMANDS.LIST === lowercase
-    const isCloseCommand = CONSTANTS.COMMANDS.CLOSE === lowercase
+    const [command = "", filename = "", destination = undefined] = inputStr.split(" ")
+    const lowercaseCmd = command.toLowerCase()
+    const doesStrHaveSpace = inputStr.indexOf(" ") !== -1
+    const isListCommand = CONSTANTS.COMMANDS.LIST === lowercaseCmd
+    const isCloseCommand = CONSTANTS.COMMANDS.CLOSE === lowercaseCmd
     const commandNeedsSpace = !isListCommand && !isCloseCommand
 
     if (!doesStrHaveSpace && commandNeedsSpace) {
@@ -34,9 +35,7 @@ function parseInput(inputStr) {
         }
     }
 
-    const [command, filename, destination = undefined] = inputStr.split(" ")
-
-    const isValidCommand = Object.values(CONSTANTS.COMMANDS).includes(command)
+    const isValidCommand = Object.values(CONSTANTS.COMMANDS).includes(lowercaseCmd)
 
     if (!isValidCommand) {
         console.log(`Invalid command - ${command}`)
@@ -47,12 +46,12 @@ function parseInput(inputStr) {
         }
     }
 
-    const isValidMoveCommand = destination && command === CONSTANTS.COMMANDS.MOVE
+    const isValidMoveCommand = destination && lowercaseCmd === CONSTANTS.COMMANDS.MOVE
 
     if (isValidMoveCommand) {
         return {
             isValid: true,
-            command,
+            command: lowercaseCmd,
             filename,
             destination
         }
@@ -60,7 +59,7 @@ function parseInput(inputStr) {
 
     return {
         isValid: true,
-        command,
+        command: lowercaseCmd,
         filename
     }
 }
